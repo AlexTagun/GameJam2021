@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Camera _camera = null;
+    [SerializeField] private Transform _target = null;
     [SerializeField] private float _speed = 0f;
     [SerializeField] private float _speedRotation = 0f;
     [SerializeField] private float _jumpSpeed = 0f;
@@ -31,7 +32,8 @@ public class PlayerMovement : MonoBehaviour {
         this.gameObject.transform.rotation = Quaternion.AngleAxis(this.mouseDeltaX, Vector3.up);
         verticalRotation = Quaternion.AngleAxis(this.mouseDeltaX, Vector3.up);
         horizontalRotarion = Quaternion.AngleAxis(-this.mouseDeltaY, Vector3.right);
-        _camera.transform.rotation = startRotation * verticalRotation * horizontalRotarion;
+        //_camera.transform.rotation = startRotation * verticalRotation * horizontalRotarion;
+        _target.rotation = startRotation * verticalRotation * horizontalRotarion;
     }
 
     private void Move(Vector3 vel) {
