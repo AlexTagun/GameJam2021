@@ -15,6 +15,7 @@ MonoBehaviour:
   components:
   - {fileID: 2810608912633198703}
   - {fileID: 3603381352852055224}
+  - {fileID: 686250977502513481}
 --- !u!114 &686250977502513481
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -30,20 +31,20 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   type:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   intensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
     min: 0
     max: 1
   response:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.8
     min: 0
     max: 1
   texture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
 --- !u!114 &2810608912633198703
 MonoBehaviour:
