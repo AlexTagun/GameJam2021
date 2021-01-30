@@ -68,11 +68,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbc30a1406248e47a3c56085853802e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToChangeGoalPosition: 3
   playerTransform: {fileID: 0}
   ScanFrequency: 3
   ScanRadius: 4
   AttackRadius: 2
+  DistanceToFlee: 6
   player: {fileID: 0}
   renderer: {fileID: 3546836803853095762}
 --- !u!136 &3546836802215990434

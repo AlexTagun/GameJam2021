@@ -8,6 +8,7 @@ public class MurdererAI : MonoBehaviour {
     [SerializeField] private float ScanFrequency;
     [SerializeField] private float ScanRadius;
     [SerializeField] private float AttackRadius;
+    [SerializeField] private float DistanceToFlee;
     [SerializeField] private Player player;
 
     private NavMeshAgent navMesh;
@@ -91,7 +92,7 @@ public class MurdererAI : MonoBehaviour {
 
     private bool IsSeenByPlayer() {
         if (!renderer.isVisible) return false;
-
+        if (DistanceToFlee < Vector3.Distance(transform.position, player.transform.position)) return false;
         Vector2 pos = _camera.WorldToViewportPoint(transform.position);
         Debug.Log(pos);
         if (Vector2.Distance(pos, new Vector2(0.5f, 0.5f)) < 0.35f) {
