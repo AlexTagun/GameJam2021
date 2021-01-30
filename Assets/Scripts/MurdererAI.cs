@@ -75,6 +75,9 @@ public class MurdererAI : MonoBehaviour {
 
     private IEnumerator RunFromCor() {
         while (IsSeenByPlayer()) {
+
+            ScreenFlash.Instance.ShowFlash();
+
             RunFrom();
             yield return new WaitForSeconds(1);
         }
