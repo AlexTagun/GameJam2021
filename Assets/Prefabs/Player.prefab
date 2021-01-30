@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoiseLevel: 1
-  VisibilityLevel: 20
+  VisibilityLevel: 1
 --- !u!114 &5006454652942513609
 MonoBehaviour:
   m_ObjectHideFlags: 0
