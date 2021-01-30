@@ -82,7 +82,7 @@ public class MurdererAI : MonoBehaviour {
     private IEnumerator RunFromCor() {
         while (IsSeenByPlayer()) {
             
-            LeanTween.value(gameObject, 0f, -100f, 0.2f)
+            LeanTween.value(gameObject, 0f, -100f, 0.01f)
                 .setOnUpdate(f => {
                     _colorAdjustments.contrast.value = f;
                 }).setOnComplete(() => {
@@ -100,14 +100,22 @@ public class MurdererAI : MonoBehaviour {
     }
 
     private void RunFrom() {
-        Vector3 runTo = (transform.position - player.transform.position).normalized;
+        // Vector3 runTo = (transform.position - player.transform.position).normalized;
+        //
+        // var angle = Random.Range(-45, 45);
+        // runTo.x = Mathf.Acos(Mathf.Deg2Rad * angle);
+        // runTo.z = Mathf.Asin(Mathf.Deg2Rad * angle);
+        // runTo *= 10;
+        // Debug.Log(runTo);
+        // navMesh.SetDestination(transform.position + runTo);
+        
+        Vector3 randomVector = Random.onUnitSphere;
+        randomVector.y = 0;
 
-        var angle = Random.Range(-45, 45);
-        runTo.x = Mathf.Acos(Mathf.Deg2Rad * angle);
-        runTo.z = Mathf.Asin(Mathf.Deg2Rad * angle);
-        runTo *= 10;
-        Debug.Log(runTo);
-        navMesh.SetDestination(transform.position + runTo);
+        randomVector = randomVector.normalized * 40;
+        Debug.Log(randomVector);
+        transform.position = transform.position + randomVector;
+
     }
 
     [SerializeField] private Renderer renderer;
