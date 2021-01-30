@@ -70,6 +70,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToChangeGoalPosition: 3
   playerTransform: {fileID: 0}
+  ScanFrequency: 3
+  ScanRadius: 4
+  AttackRadius: 2
+  player: {fileID: 0}
 --- !u!136 &3546836802215990434
 CapsuleCollider:
   m_ObjectHideFlags: 0

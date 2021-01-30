@@ -1892,6 +1892,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &686787056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1645591468872230769, guid: 8964c443dc9b77349b27c14477c373c0, type: 3}
+  m_PrefabInstance: {fileID: 5006454652978093459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686787049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b14526bab8f884198ff0f555b61cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &764701201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6134,6 +6145,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 39921760}
+    - target: {fileID: 3546836802215990437, guid: 07243567075bcfa40a47b3b8ecfbff9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 686787056}
     - target: {fileID: 3546836802215990438, guid: 07243567075bcfa40a47b3b8ecfbff9b, type: 3}
       propertyPath: m_Name
       value: Murderer
