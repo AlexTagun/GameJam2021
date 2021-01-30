@@ -6567,6 +6567,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Murderer
       objectReference: {fileID: 0}
+    - target: {fileID: 3546836802215990438, guid: 07243567075bcfa40a47b3b8ecfbff9b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07243567075bcfa40a47b3b8ecfbff9b, type: 3}
 --- !u!1001 &5006454652978093459

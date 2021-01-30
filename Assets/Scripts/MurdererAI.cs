@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class MurdererAI : MonoBehaviour {
     [SerializeField] private Transform playerTransform;
@@ -29,11 +31,15 @@ public class MurdererAI : MonoBehaviour {
 
     private MurdererStates _curState;
     private Coroutine _curCoroutine;
+    private ColorAdjustments _colorAdjustments;
 
     private void Start() {
         navMesh = GetComponent<NavMeshAgent>();
         _camera = Camera.main;
         _curState = MurdererStates.Roaming;
+        
+        var volume = GameObject.Find("Global Volume").GetComponent<Volume>();
+        volume.profile.TryGet(out _colorAdjustments);
     }
 
     private void Update() {
@@ -75,9 +81,16 @@ public class MurdererAI : MonoBehaviour {
 
     private IEnumerator RunFromCor() {
         while (IsSeenByPlayer()) {
-
-            ScreenFlash.Instance.ShowFlash();
-
+            
+            LeanTween.value(gameObject, 0f, -100f, 0.2f)
+                .setOnUpdate(f => {
+                    _colorAdjustments.contrast.value = f;
+                }).setOnComplete(() => {
+                    LeanTween.value(gameObject, -100f, 0, 0.8f)
+                        .setOnUpdate(f => {
+                            _colorAdjustments.contrast.value = f;
+                        });
+                });
             RunFrom();
             yield return new WaitForSeconds(1);
         }
