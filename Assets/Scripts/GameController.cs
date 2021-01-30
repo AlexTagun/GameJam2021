@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private float delayRestartAfterDeath = 7f;
 
     public Player Player { get; private set; }
+
+    public Action<bool> OnGameOver;
 
     public static GameController Instance { get; private set; }
 
@@ -27,6 +30,12 @@ public class GameController : MonoBehaviour
         {
             CreateFlashlight(RememberFlashlight.Instance.GetLastPosition());
         }
+    }
+
+    public void HandleGameOver(bool isWin)
+    {
+        OnGameOver?.Invoke(isWin);
+        Restart();
     }
 
     public void Restart()

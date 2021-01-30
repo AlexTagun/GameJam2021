@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
         playableDirectorFalling.Play();
         playerMovement.SetCanMove(false);
         RememberFlashlight.Instance.RememberLastPosition(transform.position);
-        GameController.Instance.Restart();
+        GameController.Instance.HandleGameOver(false);
     }
 
     public void RaiseFlashlight(Flashlight flashlight)
