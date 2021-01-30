@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5006454652942513609}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _target: {fileID: 5006454652986108426}
   _speed: 5
+  _speedOnShift: 0
   _speedRotation: 5
   _jumpSpeed: 1
   _jumpFrameTime: 2

@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Awake() {
         startRotation = transform.rotation;
+        CanMove = true;
     }
 
     public void Rotate(float mouseDeltaX, float mouseDeltaY) {
@@ -50,6 +51,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update()
     {
+        if (!CanMove) return;
+
         // движение камеры и поворот player
         Rotate(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         
@@ -90,7 +93,8 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log(other.gameObject.name);
+    public void Died()
+    {
+
     }
 }
