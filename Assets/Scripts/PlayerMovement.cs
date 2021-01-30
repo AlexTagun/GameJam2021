@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour {
     public void SetCanMove(bool value)
     {
         CanMove = value;
+
+        if (!value) audioWalk.Stop();
     }
 
     public bool HasFlashlight { get; private set; }

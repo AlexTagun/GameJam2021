@@ -14,6 +14,8 @@ public class Player : MonoBehaviour {
 
     private PlayerMovement playerMovement = null;
 
+    private bool isAlive = true;
+
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -25,6 +27,13 @@ public class Player : MonoBehaviour {
     {
         NumberAttempts--;
         if (NumberAttempts > 0) return;
+        Died();
+    }
+
+    public void Died()
+    {
+        if (!isAlive) return;
+        isAlive = false;
         playableDirectorFalling.Play();
         playerMovement.SetCanMove(false);
         RememberFlashlight.Instance.RememberLastPosition(transform.position);
@@ -32,7 +41,7 @@ public class Player : MonoBehaviour {
     }
 
     public void RaiseFlashlight(Flashlight flashlight)
-    {
+    {     
         playerMovement.SetHasFlashlight(true);
         playerMovement.TurnOnFlashlight(true);
         Destroy(flashlight.gameObject);

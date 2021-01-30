@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject flashlightPrefab = null;
     [SerializeField] private float delayRestartAfterDeath = 7f;
 
+    public Player Player { get; private set; }
 
     public static GameController Instance { get; private set; }
 
@@ -16,6 +17,8 @@ public class GameController : MonoBehaviour
         if (Instance == null)
             Instance = this;
         else if (Instance == this) Destroy(gameObject);
+
+        Player = FindObjectOfType<Player>();
     }
 
     private void Start()

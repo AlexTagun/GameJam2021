@@ -47,6 +47,8 @@ public class MurdererAI : MonoBehaviour {
                 navMeshAgent.speed = FollowingSpeed;
                 navMesh.SetDestination(playerTransform.position);
                 if (Vector3.Distance(transform.position, player.transform.position) < AttackRadius) {
+
+                    GameController.Instance.Player.Died();
                     Debug.Log("Kill");
                 }
 
