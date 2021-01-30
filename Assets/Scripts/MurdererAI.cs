@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MurdererAI : MonoBehaviour
-{
-    [SerializeField] private float timeToChangeGoalPosition = 3f;
+public class MurdererAI : MonoBehaviour {
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float ScanFrequency;
     [SerializeField] private float ScanRadius;
@@ -15,7 +13,7 @@ public class MurdererAI : MonoBehaviour
     private NavMeshAgent navMesh;
 
     private float curTime = 0f;
-    
+
     private enum MurdererStates {
         Roaming,
         Following,
@@ -28,33 +26,28 @@ public class MurdererAI : MonoBehaviour
     private MurdererStates _curState;
     private Coroutine _curCoroutine;
 
-    private void Start()
-    {
+    private void Start() {
         navMesh = GetComponent<NavMeshAgent>();
-
+        _camera = Camera.main;
         _curState = MurdererStates.Roaming;
     }
 
-    private void Update()
-    {
-
-        // if (curTime >= timeToChangeGoalPosition)
-        // {
-        //     curTime = 0f;
-        //     navMesh.SetDestination(playerTransform.position);
-        // }
-        // else curTime += Time.deltaTime;
+    private void Update() {
+        if (IsSeenByPlayer()) _curState = MurdererStates.Flee;
 
         switch (_curState) {
             case MurdererStates.Roaming:
-                if(_curCoroutine == null) _curCoroutine = StartCoroutine(ScanCoroutine());
-                // StartCoroutine(ScanCoroutine());
+                if (_curCoroutine == null) _curCoroutine = StartCoroutine(ScanCoroutine());
                 break;
             case MurdererStates.Following:
                 navMesh.SetDestination(playerTransform.position);
                 if (Vector3.Distance(transform.position, player.transform.position) < AttackRadius) {
                     Debug.Log("Kill");
                 }
+
+                break;
+            case MurdererStates.Flee:
+                if (_curCoroutine == null) _curCoroutine = StartCoroutine(RunFromCor());
                 break;
         }
     }
@@ -70,5 +63,41 @@ public class MurdererAI : MonoBehaviour
         }
 
         _curCoroutine = null;
+    }
+
+    private IEnumerator RunFromCor() {
+        while (IsSeenByPlayer()) {
+            RunFrom();
+            yield return new WaitForSeconds(1);
+        }
+
+        _curState = MurdererStates.Following;
+        _curCoroutine = null;
+    }
+
+    private void RunFrom() {
+        Vector3 runTo = (transform.position - player.transform.position).normalized;
+
+        var angle = Random.Range(-45, 45);
+        runTo.x = Mathf.Acos(Mathf.Deg2Rad * angle);
+        runTo.z = Mathf.Asin(Mathf.Deg2Rad * angle);
+        runTo *= 10;
+        Debug.Log(runTo);
+        navMesh.SetDestination(transform.position + runTo);
+    }
+
+    [SerializeField] private Renderer renderer;
+    private Camera _camera;
+
+    private bool IsSeenByPlayer() {
+        if (!renderer.isVisible) return false;
+
+        Vector2 pos = _camera.WorldToViewportPoint(transform.position);
+        Debug.Log(pos);
+        if (Vector2.Distance(pos, new Vector2(0.5f, 0.5f)) < 0.35f) {
+            return true;
+        }
+
+        return false;
     }
 }
