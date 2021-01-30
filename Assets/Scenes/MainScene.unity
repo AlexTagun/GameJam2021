@@ -529,7 +529,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200519907}
-  m_LocalRotation: {x: 0.012391563, y: 0.000000017205059, z: -2.1321392e-10, w: 0.9999232}
+  m_LocalRotation: {x: 0.012391582, y: -0.000000017205059, z: 2.1321428e-10, w: 0.9999232}
   m_LocalPosition: {x: 94.05235, y: 2.719779, z: 85.62911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6002,7 +6002,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140201291}
-  m_LocalRotation: {x: 0.012391563, y: 0.000000017205059, z: -2.1321392e-10, w: 0.9999232}
+  m_LocalRotation: {x: 0.012391582, y: -0.000000017205059, z: 2.1321428e-10, w: 0.9999232}
   m_LocalPosition: {x: 94.05235, y: 2.719779, z: 85.62911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6174,6 +6174,10 @@ PrefabInstance:
       propertyPath: _speedOnShift
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5006454652942513609, guid: 8964c443dc9b77349b27c14477c373c0, type: 3}
+      propertyPath: spotLight
+      value: 
+      objectReference: {fileID: 1883585164}
     - target: {fileID: 5006454652942513610, guid: 8964c443dc9b77349b27c14477c373c0, type: 3}
       propertyPath: m_Name
       value: Player

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _jumpSpeed = 0f;
     [SerializeField] private int _jumpFrameTime = 0;
     [SerializeField] private CharacterController _characterController = null;
+    [SerializeField] private GameObject spotLight = null;
 
     private float mouseDeltaX = 0f;
     private float mouseDeltaY = 0f;
@@ -51,6 +52,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            spotLight.SetActive(!spotLight.activeSelf);
+        }
         if (!CanMove) return;
 
         // движение камеры и поворот player
