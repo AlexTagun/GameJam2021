@@ -6286,7 +6286,7 @@ PrefabInstance:
       objectReference: {fileID: 200519909}
     - target: {fileID: 5006454652942513609, guid: 8964c443dc9b77349b27c14477c373c0, type: 3}
       propertyPath: _speedOnShift
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5006454652942513609, guid: 8964c443dc9b77349b27c14477c373c0, type: 3}
       propertyPath: spotLight
