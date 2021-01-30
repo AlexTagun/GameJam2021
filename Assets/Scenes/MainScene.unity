@@ -652,7 +652,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200519907}
-  m_LocalRotation: {x: 0.012391676, y: -0.000000017213456, z: 2.1331996e-10, w: 0.9999232}
+  m_LocalRotation: {x: 0.012391657, y: 0.000000017213459, z: -2.1331965e-10, w: 0.9999232}
   m_LocalPosition: {x: 498.39, y: 2.759779, z: 498.53784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7084,7 +7084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &2085115957
 Light:
   m_ObjectHideFlags: 0
@@ -7513,7 +7513,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140201291}
-  m_LocalRotation: {x: 0.012391676, y: -0.000000017213456, z: 2.1331996e-10, w: 0.9999232}
+  m_LocalRotation: {x: 0.012391657, y: 0.000000017213459, z: -2.1331965e-10, w: 0.9999232}
   m_LocalPosition: {x: 498.39, y: 2.759779, z: 498.53784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7666,7 +7666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3546836802215990438, guid: 07243567075bcfa40a47b3b8ecfbff9b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8515243540330419299, guid: 07243567075bcfa40a47b3b8ecfbff9b, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].time
