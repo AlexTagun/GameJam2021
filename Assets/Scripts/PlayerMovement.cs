@@ -84,4 +84,8 @@ public class PlayerMovement : MonoBehaviour {
             yield return null;
         }
     }
+
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log(other.gameObject.name);
+    }
 }
