@@ -9,7 +9,10 @@ public class MurdererAI : MonoBehaviour {
     [SerializeField] private float ScanRadius;
     [SerializeField] private float AttackRadius;
     [SerializeField] private float DistanceToFlee;
+    [SerializeField] private float FollowingSpeed;
+    [SerializeField] private float FleeSpeed;
     [SerializeField] private Player player;
+    [SerializeField] private NavMeshAgent navMeshAgent;
 
     private NavMeshAgent navMesh;
 
@@ -41,6 +44,7 @@ public class MurdererAI : MonoBehaviour {
                 if (_curCoroutine == null) _curCoroutine = StartCoroutine(ScanCoroutine());
                 break;
             case MurdererStates.Following:
+                navMeshAgent.speed = FollowingSpeed;
                 navMesh.SetDestination(playerTransform.position);
                 if (Vector3.Distance(transform.position, player.transform.position) < AttackRadius) {
                     Debug.Log("Kill");
@@ -48,6 +52,7 @@ public class MurdererAI : MonoBehaviour {
 
                 break;
             case MurdererStates.Flee:
+                navMeshAgent.speed = FleeSpeed;
                 if (_curCoroutine == null) _curCoroutine = StartCoroutine(RunFromCor());
                 break;
         }
@@ -95,7 +100,7 @@ public class MurdererAI : MonoBehaviour {
         if (DistanceToFlee < Vector3.Distance(transform.position, player.transform.position)) return false;
         Vector2 pos = _camera.WorldToViewportPoint(transform.position);
         Debug.Log(pos);
-        if (Vector2.Distance(pos, new Vector2(0.5f, 0.5f)) < 0.35f) {
+        if (Vector2.Distance(pos, new Vector2(0.5f, 0.5f)) < 0.5f) {
             return true;
         }
 

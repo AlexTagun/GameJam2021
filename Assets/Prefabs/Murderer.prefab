@@ -73,8 +73,11 @@ MonoBehaviour:
   ScanRadius: 4
   AttackRadius: 2
   DistanceToFlee: 6
+  FollowingSpeed: 3.5
+  FleeSpeed: 7
   player: {fileID: 0}
-  renderer: {fileID: 3546836803853095762}
+  navMeshAgent: {fileID: 3546836802215990439}
+  renderer: {fileID: 3546836802787787723}
 --- !u!136 &3546836802215990434
 CapsuleCollider:
   m_ObjectHideFlags: 0
