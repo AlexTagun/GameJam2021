@@ -15,12 +15,16 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private CharacterController _characterController = null;
     [SerializeField] private GameObject spotLight = null;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource audioWalk = null;
+
     private float mouseDeltaX = 0f;
     private float mouseDeltaY = 0f;
     private Quaternion startRotation = Quaternion.identity;
     private Quaternion verticalRotation = Quaternion.identity;
     private Quaternion horizontalRotarion = Quaternion.identity;
 
+    private bool isShiftWalking = false;
 
     public bool CanMove  { get; private set; }
 
@@ -101,8 +105,36 @@ public class PlayerMovement : MonoBehaviour {
         //velocity.y -= 9.8f * Time.deltaTime;
         var isShift = Input.GetKey(KeyCode.LeftShift);
 
+        if (isShift && !isShiftWalking)
+        {
+            isShiftWalking = true;
+            //audioWalk.clip = clipWalkFast;
+            audioWalk.volume = 1f;
+            audioWalk.pitch = 1.5f;
+        }
+        else if (!isShift && isShiftWalking)
+        {
+            isShiftWalking = false;
+            audioWalk.volume = 0.7f;
+            audioWalk.pitch = 1f;
+            //audioWalk.clip = clipWalk;
+        }
+
         Move(velocity, isShift);
         
+        if (_characterController.isGrounded && _characterController.velocity.magnitude >= 1f)
+        {
+            if (!audioWalk.isPlaying)
+            {
+                audioWalk.Play();
+            }
+        }
+        else
+        {
+            if (audioWalk.isPlaying) audioWalk.Stop();
+        }
+
+
     }
 
 
