@@ -26,6 +26,15 @@ public class Player : MonoBehaviour {
         NumberAttempts--;
         if (NumberAttempts > 0) return;
         playableDirectorFalling.Play();
-        playerMovement.CanMove = false;
+        playerMovement.SetCanMove(false);
+        RememberFlashlight.Instance.RememberLastPosition(transform.position);
+        GameController.Instance.Restart();
+    }
+
+    public void RaiseFlashlight(Flashlight flashlight)
+    {
+        playerMovement.SetHasFlashlight(true);
+        playerMovement.TurnOnFlashlight(true);
+        Destroy(flashlight.gameObject);
     }
 }

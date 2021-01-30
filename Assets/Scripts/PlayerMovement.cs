@@ -22,12 +22,35 @@ public class PlayerMovement : MonoBehaviour {
     private Quaternion horizontalRotarion = Quaternion.identity;
 
 
+    public bool CanMove  { get; private set; }
+
+    public void SetCanMove(bool value)
+    {
+        CanMove = value;
+    }
+
+    public bool HasFlashlight { get; private set; }
+    public void SetHasFlashlight(bool value)
+    {
+        HasFlashlight = value;
+    }
 
     private void Awake() {
         startRotation = transform.rotation;
         CanMove = true;
     }
 
+    private void Start()
+    {
+        HasFlashlight = !RememberFlashlight.Instance.NeedSpawnFlashLight;
+        TurnOnFlashlight(HasFlashlight);
+
+    }
+
+    public void TurnOnFlashlight(bool b)
+    {
+        spotLight.SetActive(b);
+    }
     public void Rotate(float mouseDeltaX, float mouseDeltaY) {
         this.mouseDeltaX += mouseDeltaX * _speedRotation;
         this.mouseDeltaY += mouseDeltaY * _speedRotation;
@@ -46,17 +69,15 @@ public class PlayerMovement : MonoBehaviour {
         vel.z *= speed * Time.deltaTime;
         _characterController.Move(vel);
     }
-    
-    public bool CanMove = false;
-    public bool CanShoot = false;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (HasFlashlight && Input.GetMouseButtonDown(1))
         {
-            spotLight.SetActive(!spotLight.activeSelf);
+            TurnOnFlashlight(!spotLight.activeSelf);
         }
         if (!CanMove) return;
+
 
         // движение камеры и поворот player
         Rotate(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
