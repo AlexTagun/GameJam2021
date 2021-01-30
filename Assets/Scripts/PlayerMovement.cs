@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Camera _camera = null;
     [SerializeField] private Transform _target = null;
     [SerializeField] private float _speed = 0f;
+    [SerializeField] private float _speedOnShift = 0f;
     [SerializeField] private float _speedRotation = 0f;
     [SerializeField] private float _jumpSpeed = 0f;
     [SerializeField] private int _jumpFrameTime = 0;
@@ -36,9 +37,11 @@ public class PlayerMovement : MonoBehaviour {
         _target.rotation = startRotation * verticalRotation * horizontalRotarion;
     }
 
-    private void Move(Vector3 vel) {
-        vel.x *= _speed * Time.deltaTime;
-        vel.z *= _speed * Time.deltaTime;
+    private void Move(Vector3 vel, bool isShift) {
+        var speed = (isShift) ? _speedOnShift : _speed;
+
+        vel.x *= speed * Time.deltaTime;
+        vel.z *= speed * Time.deltaTime;
         _characterController.Move(vel);
     }
     
@@ -67,7 +70,9 @@ public class PlayerMovement : MonoBehaviour {
             };
         }
         //velocity.y -= 9.8f * Time.deltaTime;
-        Move(velocity);
+        var isShift = Input.GetKey(KeyCode.LeftShift);
+
+        Move(velocity, isShift);
         
     }
 
@@ -80,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
             Vector3 velocity = Vector3.zero;
             velocity.y += Mathf.Sqrt((_jumpSpeed - k) * -2f * -9.8f);
             k += k;
-            Move(velocity);
+            Move(velocity, false);
             yield return null;
         }
     }
