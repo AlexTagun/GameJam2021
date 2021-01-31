@@ -55,15 +55,15 @@ public class WinPlace : MonoBehaviour
     {
         if (coroutineBlick != null) return;
         var distance = Vector3.Distance(playerTransform.position, blickPosition.position);
-        if (distance >= 800)
+        if (distance >= 600)
         {
-            if (curTimeToBlick >= 15) coroutineBlick = StartCoroutine(ShowBlick(3));
-        }
-        else if (distance >= 600)
-        {
-            if (curTimeToBlick >= 20) coroutineBlick = StartCoroutine(ShowBlick(3));
+            if (curTimeToBlick >= 15) coroutineBlick = StartCoroutine(ShowBlick(10));
         }
         else if (distance >= 300)
+        {
+            if (curTimeToBlick >= 20) coroutineBlick = StartCoroutine(ShowBlick(5));
+        }
+        else if (distance >= 100)
         {
             if (curTimeToBlick >= 30) coroutineBlick = StartCoroutine(ShowBlick(3));
         }
