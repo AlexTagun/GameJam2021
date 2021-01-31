@@ -12,6 +12,7 @@ public class WinPlace : MonoBehaviour
     [SerializeField] private Transform blickPosition;
 
     [SerializeField] private AudioSource audioSiren;
+    [SerializeField] private List<AudioClip> sirenVoices = new List<AudioClip>();
 
     private GameObject blick;
 
@@ -72,6 +73,9 @@ public class WinPlace : MonoBehaviour
     private IEnumerator ShowBlick(float timeShowing)
     {
         Debug.Log("Сирена");
+
+        GameController.Instance.Player.PlayVoice(sirenVoices[Random.Range(0, sirenVoices.Count)]);
+
         audioSiren.Play();
         blick.SetActive(true);
         isShowindBlink = true;
