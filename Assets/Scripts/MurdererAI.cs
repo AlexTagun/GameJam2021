@@ -16,6 +16,7 @@ public class MurdererAI : MonoBehaviour {
     [SerializeField] private float RoamingRadius = 40f;
     [SerializeField] private float RoamingSpeed = 3.5f;
     [SerializeField] private float TpRadius = 65f;
+    [SerializeField] private float ShowTime = 0.5f;
     [SerializeField] private Player player;
     [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private Sprite[] sprites;
@@ -45,6 +46,7 @@ public class MurdererAI : MonoBehaviour {
         var volume = GameObject.Find("Global Volume").GetComponent<Volume>();
         volume.profile.TryGet(out _colorAdjustments);
         StartCoroutine(ScanCoroutine());
+        renderer.color = new Color(0,0,0,0.01f);
     }
 
     private void Update() {
@@ -111,7 +113,7 @@ public class MurdererAI : MonoBehaviour {
         _curCoroutine = null;
     }
 
-    private void RunFrom() {
+    private IEnumerator RunFrom() {
         // Vector3 runTo = (transform.position - player.transform.position).normalized;
         //
         // var angle = Random.Range(-45, 45);
@@ -120,6 +122,10 @@ public class MurdererAI : MonoBehaviour {
         // runTo *= 10;
         // Debug.Log(runTo);
         // navMesh.SetDestination(transform.position + runTo);
+        
+        renderer.color = Color.white;
+        yield return new WaitForSeconds(ShowTime);
+        renderer.color = new Color(0,0,0,0.01f);
         if (_curState == MurdererStates.Flee) {
             LeanTween.value(gameObject, 0f, -100f, 0.01f)
                 .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
@@ -149,13 +155,13 @@ public class MurdererAI : MonoBehaviour {
         var dist = Vector3.Distance(transform.position, player.transform.position);
         if (DistanceToFlee > dist) {
             _curState = MurdererStates.Flee;
-            RunFrom();
+            StartCoroutine(RunFrom());
             return true;
         }
 
         if (DistanceToSpot > dist) {
             _curState = MurdererStates.Spotted;
-            RunFrom();
+            StartCoroutine(RunFrom());
             return true;
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour {
 
@@ -21,6 +22,8 @@ public class Player : MonoBehaviour {
 
     private PlayerMovement playerMovement = null;
     private FlashlightController flashlightController = null;
+    
+    private ColorAdjustments _colorAdjustments;
 
     private bool isAlive = true;
 
@@ -46,6 +49,12 @@ public class Player : MonoBehaviour {
         playerMovement.SetCanMove(false);
         RememberFlashlight.Instance.RememberLastPosition(transform.position);
         GameController.Instance.HandleGameOver(false);
+        
+        // LeanTween.value(gameObject, 0f, -100f, 0.01f)
+        //     .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
+        //         LeanTween.value(gameObject, -100f, 0, 0.8f)
+        //             .setOnUpdate(f => { _colorAdjustments.contrast.value = f; });
+        //     });
     }
 
     public void RaiseFlashlight(Flashlight flashlight)
