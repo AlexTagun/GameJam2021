@@ -148,6 +148,7 @@ public class MurdererAI : MonoBehaviour {
 
     private bool IsSeenByPlayer() {
         if (!renderer.isVisible) return false;
+        if (!player.flashlightController.IsBurn) return false;
         Vector2 pos = _camera.WorldToViewportPoint(renderer.transform.position);
         var camDist = Vector2.Distance(pos, new Vector2(0.5f, 0.5f));
 

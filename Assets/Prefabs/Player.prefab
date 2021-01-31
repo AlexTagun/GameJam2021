@@ -135,9 +135,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoiseLevel: 1
-  VisibilityLevel: 1
   NumberAttempts: 3
+  visibilityLevelOn: 20
+  visibilityLevelOff: 1
   playableDirectorFalling: {fileID: 0}
+  flashlightController: {fileID: 0}
 --- !u!114 &5006454652942513609
 MonoBehaviour:
   m_ObjectHideFlags: 0

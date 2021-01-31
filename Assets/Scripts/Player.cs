@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private PlayableDirector playableDirectorFalling;
 
     private PlayerMovement playerMovement = null;
-    private FlashlightController flashlightController = null;
+    public FlashlightController flashlightController = null;
     
     private ColorAdjustments _colorAdjustments;
 
