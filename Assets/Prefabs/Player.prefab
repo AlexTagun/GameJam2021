@@ -301,8 +301,11 @@ MonoBehaviour:
   audioFlashlight: {fileID: 2234775192622280286}
   flashlightOn: {fileID: 8300000, guid: 1ae19bbf2112838489c3c39784ce1f90, type: 3}
   flashlightOff: {fileID: 8300000, guid: bce4cfc4c962f3346ad85f8d17fa861f, type: 3}
-  batteryIsLow: {fileID: 8300000, guid: 7d518883a1cd3bf4b81bce81ce1fb2a1, type: 3}
-  flashlightDead: {fileID: 8300000, guid: 005ca3c7437952146a4eb22f584d1a20, type: 3}
+  batteryIsLow:
+  - {fileID: 8300000, guid: 7d518883a1cd3bf4b81bce81ce1fb2a1, type: 3}
+  - {fileID: 8300000, guid: 25a22ed5f7786524bbd62c97a8e86639, type: 3}
+  - {fileID: 8300000, guid: 005ca3c7437952146a4eb22f584d1a20, type: 3}
+  flashlightDead: {fileID: 8300000, guid: 7d518883a1cd3bf4b81bce81ce1fb2a1, type: 3}
 --- !u!1 &5006454652986108427
 GameObject:
   m_ObjectHideFlags: 0
