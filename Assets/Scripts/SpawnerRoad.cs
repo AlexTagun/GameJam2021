@@ -6,8 +6,18 @@ public class SpawnerRoad : MonoBehaviour
 {
     [SerializeField] private List<WinPlace> winPlaces = new List<WinPlace>();
 
+    public WinPlace CurWinPlace { get; private set; }
 
     private bool isRoadSpawn = false;
+
+    public static SpawnerRoad Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance == this) Destroy(gameObject);
+    }
     void Start()
     {
         
@@ -29,8 +39,14 @@ public class SpawnerRoad : MonoBehaviour
                 maxDistantPlace = place;
             }
         }
+        CurWinPlace = maxDistantPlace;
         maxDistantPlace.Activate();
-        isRoadSpawn = true;
+        SetIsRoadSpawn(true);
+    }
+
+    public void SetIsRoadSpawn(bool b)
+    {
+        isRoadSpawn = b;
     }
 
     private void OnTriggerExit(Collider other)

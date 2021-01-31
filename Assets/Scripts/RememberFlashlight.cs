@@ -5,10 +5,12 @@ using UnityEngine;
 public class RememberFlashlight : MonoBehaviour
 {
     public bool NeedSpawnFlashLight { get; private set; }
+    public bool NeedActivateRoad { get; private set; }
     public static RememberFlashlight Instance { get; private set; }
 
 
     private Vector3 position = Vector3.zero;
+    private WinPlace winPlace = null;
 
     private void Awake()
     {
@@ -25,8 +27,21 @@ public class RememberFlashlight : MonoBehaviour
         position = pos;
     }
 
+    public void RememberWinPlace(WinPlace winPlace)
+    {
+        if (winPlace != null) NeedActivateRoad = true;
+        this.winPlace = winPlace;
+    }
+
+
+
     public Vector3 GetLastPosition() 
     {
         return position;
+    }
+
+    public WinPlace GetWinPlace()
+    {
+        return winPlace;
     }
 }

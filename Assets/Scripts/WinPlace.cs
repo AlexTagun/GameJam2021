@@ -43,6 +43,9 @@ public class WinPlace : MonoBehaviour
         blickTransform = blick.transform;
         playerTransform = GameController.Instance.Player.transform;
         road.SetActive(true);
+
+        curTimeToBlick = (RememberFlashlight.Instance.NeedActivateRoad) ? 0 : 1000;
+
         isActivate = true;
     }
 

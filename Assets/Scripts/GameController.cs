@@ -30,6 +30,12 @@ public class GameController : MonoBehaviour
         {
             CreateFlashlight(RememberFlashlight.Instance.GetLastPosition());
         }
+        if (RememberFlashlight.Instance.NeedActivateRoad)
+        {
+            var winPlace = RememberFlashlight.Instance.GetWinPlace();
+            winPlace.Activate();
+            SpawnerRoad.Instance.SetIsRoadSpawn(true);
+        }
     }
 
     public void HandleGameOver(bool isWin)
