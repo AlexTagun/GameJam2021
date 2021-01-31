@@ -10,6 +10,8 @@ public class WinPlace : MonoBehaviour
     [SerializeField] private GameObject blickPrefab;
     [SerializeField] private Transform blickPosition;
 
+    [SerializeField] private AudioSource audioSiren;
+
     private Transform blickTransform = null;
     private Transform playerTransform = null;
 
@@ -33,6 +35,7 @@ public class WinPlace : MonoBehaviour
         blickTransform = blick.transform;
         playerTransform = GameController.Instance.Player.transform;
         road.SetActive(true);
+        audioSiren.Play();
         isActivate = true;
     }
 
