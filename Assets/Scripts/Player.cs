@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private float visibilityLevelOn = 5;
     [SerializeField] private float visibilityLevelOff = 1;
     [SerializeField] private PlayableDirector playableDirectorFalling;
+    [SerializeField] private AudioSource audioSource;
 
     private PlayerMovement playerMovement = null;
     public FlashlightController flashlightController = null;
@@ -62,5 +63,9 @@ public class Player : MonoBehaviour {
         flashlightController.SetHasFlashlight(true);
         flashlightController.TurnOnFlashlight(true);
         Destroy(flashlight.gameObject);
+    }
+
+    public void PlayVoice(AudioClip clip) {
+        audioSource.PlayOneShot(clip);
     }
 }

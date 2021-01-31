@@ -89,6 +89,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 21d5f585306032a449e1bc81ce131858, type: 3}
   - {fileID: 21300000, guid: f75b6c9d8fc1e2b4492dd839204063eb, type: 3}
   - {fileID: 21300000, guid: 3146866608bf0234bb0bb3880bbb7aa8, type: 3}
+  PlayerFleeVoice: {fileID: 8300000, guid: c1dfc0a62e3979c4196ca5979dd7f1b7, type: 3}
+  PlayerSpotVoice: {fileID: 8300000, guid: 943ec479c0c62c84abe2641a7df637d5, type: 3}
   renderer: {fileID: 5632725212351695771}
 --- !u!136 &3546836802215990434
 CapsuleCollider:

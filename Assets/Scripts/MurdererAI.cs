@@ -20,6 +20,8 @@ public class MurdererAI : MonoBehaviour {
     [SerializeField] private Player player;
     [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private Sprite[] sprites;
+    [SerializeField] private AudioClip PlayerFleeVoice;
+    [SerializeField] private AudioClip PlayerSpotVoice;
 
     private NavMeshAgent navMesh;
 
@@ -113,7 +115,10 @@ public class MurdererAI : MonoBehaviour {
         _curCoroutine = null;
     }
 
+    private bool _runCoroutine;
+
     private IEnumerator RunFrom() {
+        _runCoroutine = true;
         // Vector3 runTo = (transform.position - player.transform.position).normalized;
         //
         // var angle = Random.Range(-45, 45);
@@ -141,12 +146,14 @@ public class MurdererAI : MonoBehaviour {
         randomVector = randomVector.normalized * TpRadius;
         transform.position = transform.position + randomVector;
         renderer.sprite = sprites[Random.Range(0, sprites.Length)];
+        _runCoroutine = false;
     }
 
     [SerializeField] private SpriteRenderer renderer;
     private Camera _camera;
 
     private bool IsSeenByPlayer() {
+        if (_runCoroutine) return false;
         if (!renderer.isVisible) return false;
         if (!player.flashlightController.IsBurn) return false;
         Vector2 pos = _camera.WorldToViewportPoint(renderer.transform.position);
@@ -156,12 +163,14 @@ public class MurdererAI : MonoBehaviour {
         var dist = Vector3.Distance(transform.position, player.transform.position);
         if (DistanceToFlee > dist) {
             _curState = MurdererStates.Flee;
+            player.PlayVoice(PlayerFleeVoice);
             StartCoroutine(RunFrom());
             return true;
         }
 
         if (DistanceToSpot > dist) {
             _curState = MurdererStates.Spotted;
+            player.PlayVoice(PlayerSpotVoice);
             StartCoroutine(RunFrom());
             return true;
         }
