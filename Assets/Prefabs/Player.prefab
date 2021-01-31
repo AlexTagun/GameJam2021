@@ -305,7 +305,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7d518883a1cd3bf4b81bce81ce1fb2a1, type: 3}
   - {fileID: 8300000, guid: 25a22ed5f7786524bbd62c97a8e86639, type: 3}
   - {fileID: 8300000, guid: 005ca3c7437952146a4eb22f584d1a20, type: 3}
-  flashlightDead: {fileID: 8300000, guid: 7d518883a1cd3bf4b81bce81ce1fb2a1, type: 3}
+  flashlightDead: {fileID: 8300000, guid: f8f7ad3ff526de941ba6a51a4e9db5ac, type: 3}
 --- !u!1 &5006454652986108427
 GameObject:
   m_ObjectHideFlags: 0
