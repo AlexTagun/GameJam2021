@@ -100,24 +100,9 @@ public class MurdererAI : MonoBehaviour {
         }
     }
 
-    private IEnumerator RunFromCor() {
-        while (IsSeenByPlayer()) {
-            LeanTween.value(gameObject, 0f, -100f, 0.01f)
-                .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
-                    LeanTween.value(gameObject, -100f, 0, 0.8f)
-                        .setOnUpdate(f => { _colorAdjustments.contrast.value = f; });
-                });
-            RunFrom();
-            yield return new WaitForSeconds(1);
-        }
-
-        _curState = MurdererStates.Following;
-        _curCoroutine = null;
-    }
-
     private bool _runCoroutine;
 
-    private IEnumerator RunFrom() {
+    private IEnumerator RunFrom(bool showFlash) {
         _runCoroutine = true;
         // Vector3 runTo = (transform.position - player.transform.position).normalized;
         //
@@ -131,7 +116,7 @@ public class MurdererAI : MonoBehaviour {
         renderer.color = Color.white;
         yield return new WaitForSeconds(ShowTime);
         renderer.color = new Color(0,0,0,0.01f);
-        if (_curState == MurdererStates.Flee) {
+        if (showFlash) {
             LeanTween.value(gameObject, 0f, -100f, 0.01f)
                 .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
                     LeanTween.value(gameObject, -100f, 0, 0.8f)
@@ -164,14 +149,14 @@ public class MurdererAI : MonoBehaviour {
         if (DistanceToFlee > dist) {
             _curState = MurdererStates.Flee;
             player.PlayVoice(PlayerVoices[Random.Range(0, PlayerVoices.Length)]);
-            StartCoroutine(RunFrom());
+            StartCoroutine(RunFrom(true));
             return true;
         }
 
         if (DistanceToSpot > dist) {
             _curState = MurdererStates.Spotted;
             player.PlayVoice(PlayerVoices[Random.Range(0, PlayerVoices.Length)]);
-            StartCoroutine(RunFrom());
+            StartCoroutine(RunFrom(false));
             return true;
         }
 
