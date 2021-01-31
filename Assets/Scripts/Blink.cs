@@ -6,18 +6,16 @@ using UnityEngine;
 public class Blink : MonoBehaviour {
     [SerializeField] private Light light;
 
-    private void Start() {
-        StartCoroutine(BlinkCoroutine());
-    }
-
     public void ChangeLightIntensity(float value = 200)
     {
         light.intensity = value;
     }
+    
 
-    private IEnumerator BlinkCoroutine() {
+    public IEnumerator StartBlink(float seconds) {
         bool value = false;
-        while (true) {
+
+        for (int i = 0; i < Mathf.RoundToInt(seconds / 0.3f); i++) {
             value = !value;
             light.color = value ? Color.blue : Color.red;
             yield return new WaitForSeconds(0.3f);

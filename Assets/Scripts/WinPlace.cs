@@ -84,7 +84,7 @@ public class WinPlace : MonoBehaviour
         audioSiren.Play();
         blink.ChangeLightIntensity(200);
         isShowindBlink = true;
-        yield return new WaitForSeconds(timeShowing);
+        yield return blink.StartBlink(timeShowing);
         isShowindBlink = false;
         blink.ChangeLightIntensity(0);
         audioSiren.Stop();
