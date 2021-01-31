@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void Start() {
+        Cursor.visible = true;
         var volume = GameObject.Find("Global Volume").GetComponent<Volume>();
         volume.profile.TryGet(out _colorAdjustments);
         if (RememberFlashlight.Instance.NeedSpawnFlashLight) {
@@ -25,6 +26,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void OnPlay() {
+        Cursor.visible = false;
         for (int i = 0; i < ObjectsToShow.Length; i++) {
             ObjectsToShow[i].SetActive(true);
         }
