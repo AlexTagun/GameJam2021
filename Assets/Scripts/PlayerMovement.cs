@@ -13,13 +13,9 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _jumpSpeed = 0f;
     [SerializeField] private int _jumpFrameTime = 0;
     [SerializeField] private CharacterController _characterController = null;
-    [SerializeField] private GameObject spotLight = null;
 
     [Header("Sounds")]
     [SerializeField] private AudioSource audioWalk = null;
-    [SerializeField] private AudioSource audioFlashlight = null;
-    [SerializeField] private AudioClip flashlightOn = null;
-    [SerializeField] private AudioClip flashlightOff = null;
 
     private float mouseDeltaX = 0f;
     private float mouseDeltaY = 0f;
@@ -38,31 +34,12 @@ public class PlayerMovement : MonoBehaviour {
         if (!value) audioWalk.Stop();
     }
 
-    public bool HasFlashlight { get; private set; }
-    public void SetHasFlashlight(bool value)
-    {
-        HasFlashlight = value;
-    }
 
     private void Awake() {
         startRotation = transform.rotation;
         CanMove = true;
     }
 
-    private void Start()
-    {
-        HasFlashlight = !RememberFlashlight.Instance.NeedSpawnFlashLight;
-        spotLight.SetActive(HasFlashlight);
-
-    }
-
-    public void TurnOnFlashlight(bool b)
-    {
-        spotLight.SetActive(b);
-        var clip = (b) ? flashlightOn : flashlightOff;
-        audioFlashlight.clip = clip;
-        audioFlashlight.Play();
-    }
     public void Rotate(float mouseDeltaX, float mouseDeltaY) {
         this.mouseDeltaX += mouseDeltaX * _speedRotation;
         this.mouseDeltaY += mouseDeltaY * _speedRotation;
@@ -84,10 +61,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update()
     {
-        if (HasFlashlight && Input.GetMouseButtonDown(1))
-        {
-            TurnOnFlashlight(!spotLight.activeSelf);
-        }
         if (!CanMove) return;
 
 

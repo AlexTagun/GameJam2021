@@ -13,13 +13,14 @@ public class Player : MonoBehaviour {
     [SerializeField] private PlayableDirector playableDirectorFalling;
 
     private PlayerMovement playerMovement = null;
+    private FlashlightController flashlightController = null;
 
     private bool isAlive = true;
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
-
+        flashlightController = GetComponent<FlashlightController>();
 
     }
 
@@ -41,9 +42,9 @@ public class Player : MonoBehaviour {
     }
 
     public void RaiseFlashlight(Flashlight flashlight)
-    {     
-        playerMovement.SetHasFlashlight(true);
-        playerMovement.TurnOnFlashlight(true);
+    {
+        flashlightController.SetHasFlashlight(true);
+        flashlightController.TurnOnFlashlight(true);
         Destroy(flashlight.gameObject);
     }
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5006454652942513609}
   - component: {fileID: 686787051}
   - component: {fileID: 686787050}
+  - component: {fileID: 3785914865062298183}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -157,11 +158,7 @@ MonoBehaviour:
   _jumpSpeed: 1
   _jumpFrameTime: 2
   _characterController: {fileID: 5006454652942513615}
-  spotLight: {fileID: 0}
   audioWalk: {fileID: 686787051}
-  audioFlashlight: {fileID: 2234775192622280286}
-  flashlightOn: {fileID: 8300000, guid: 1ae19bbf2112838489c3c39784ce1f90, type: 3}
-  flashlightOff: {fileID: 8300000, guid: bce4cfc4c962f3346ad85f8d17fa861f, type: 3}
 --- !u!82 &686787051
 AudioSource:
   m_ObjectHideFlags: 0
@@ -277,6 +274,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3785914865062298183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5006454652942513610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb6fe186bfda3645b4d759aba1887be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDischarge: 240
+  timeDelayBlick: 5
+  spotLight: {fileID: 0}
+  audioFlashlight: {fileID: 2234775192622280286}
+  flashlightOn: {fileID: 8300000, guid: 1ae19bbf2112838489c3c39784ce1f90, type: 3}
+  flashlightOff: {fileID: 8300000, guid: bce4cfc4c962f3346ad85f8d17fa861f, type: 3}
 --- !u!1 &5006454652986108427
 GameObject:
   m_ObjectHideFlags: 0
