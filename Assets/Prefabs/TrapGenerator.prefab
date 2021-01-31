@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e955bf47d10f74b907a0cd59f628fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrapsCount: 100
+  TrapsCount: 70
   TrapPrefab: {fileID: 1486264292895332660, guid: 53e8778f40d232440b3ee20ce98d49af, type: 3}
