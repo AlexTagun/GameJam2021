@@ -10,6 +10,11 @@ public class Blink : MonoBehaviour {
         StartCoroutine(BlinkCoroutine());
     }
 
+    public void ChangeLightIntensity(float value = 200)
+    {
+        light.intensity = value;
+    }
+
     private IEnumerator BlinkCoroutine() {
         bool value = false;
         while (true) {

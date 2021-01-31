@@ -14,7 +14,7 @@ public class WinPlace : MonoBehaviour
     [SerializeField] private AudioSource audioSiren;
     [SerializeField] private List<AudioClip> sirenVoices = new List<AudioClip>();
 
-    private GameObject blick;
+    private Blink blink;
 
     private Transform blickTransform = null;
     private Transform playerTransform = null;
@@ -40,8 +40,8 @@ public class WinPlace : MonoBehaviour
     }
     public void Activate()
     {
-        blick = Instantiate(blickPrefab, blickPosition.position, Quaternion.identity);
-       
+        var blick = Instantiate(blickPrefab, blickPosition.position, Quaternion.identity);
+        blink = blick.GetComponent<Blink>();
         blickTransform = blick.transform;
         playerTransform = GameController.Instance.Player.transform;
         road.SetActive(true);
@@ -77,11 +77,11 @@ public class WinPlace : MonoBehaviour
         GameController.Instance.Player.PlayVoice(sirenVoices[Random.Range(0, sirenVoices.Count)]);
 
         audioSiren.Play();
-        blick.SetActive(true);
+        blink.ChangeLightIntensity(200);
         isShowindBlink = true;
         yield return new WaitForSeconds(timeShowing);
         isShowindBlink = false;
-        blick.SetActive(false);
+        blink.ChangeLightIntensity(0);
         audioSiren.Stop();
         curTimeToBlick = 0f;
         coroutineBlick = null;
