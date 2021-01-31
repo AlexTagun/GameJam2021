@@ -57,24 +57,29 @@ public class WinPlace : MonoBehaviour
         var distance = Vector3.Distance(playerTransform.position, blickPosition.position);
         if (distance >= 800)
         {
-            if (curTimeToBlick >= 45) coroutineBlick = StartCoroutine(ShowBlick(10));
+            if (curTimeToBlick >= 15) coroutineBlick = StartCoroutine(ShowBlick(3));
         }
         else if (distance >= 600)
         {
-            if (curTimeToBlick >= 60) coroutineBlick = StartCoroutine(ShowBlick(5));
+            if (curTimeToBlick >= 20) coroutineBlick = StartCoroutine(ShowBlick(3));
         }
         else if (distance >= 300)
         {
-            if (curTimeToBlick >= 120) coroutineBlick = StartCoroutine(ShowBlick(3));
+            if (curTimeToBlick >= 30) coroutineBlick = StartCoroutine(ShowBlick(3));
         }
         curTimeToBlick += Time.deltaTime;
     }
 
+    private bool playVoice = false;
     private IEnumerator ShowBlick(float timeShowing)
     {
         Debug.Log("Сирена");
 
-        GameController.Instance.Player.PlayVoice(sirenVoices[Random.Range(0, sirenVoices.Count)]);
+        if (!playVoice)
+        {
+            GameController.Instance.Player.PlayVoice(sirenVoices[Random.Range(0, sirenVoices.Count)]);
+            playVoice = true;
+        }
 
         audioSiren.Play();
         blink.ChangeLightIntensity(200);
