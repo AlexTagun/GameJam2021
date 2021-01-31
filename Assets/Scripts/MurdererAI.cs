@@ -20,8 +20,8 @@ public class MurdererAI : MonoBehaviour {
     [SerializeField] private Player player;
     [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private Sprite[] sprites;
-    [SerializeField] private AudioClip PlayerFleeVoice;
-    [SerializeField] private AudioClip PlayerSpotVoice;
+    // [SerializeField] private AudioClip PlayerFleeVoice;
+    [SerializeField] private AudioClip[] PlayerVoices;
 
     private NavMeshAgent navMesh;
 
@@ -163,14 +163,14 @@ public class MurdererAI : MonoBehaviour {
         var dist = Vector3.Distance(transform.position, player.transform.position);
         if (DistanceToFlee > dist) {
             _curState = MurdererStates.Flee;
-            player.PlayVoice(PlayerFleeVoice);
+            player.PlayVoice(PlayerVoices[Random.Range(0, PlayerVoices.Length)]);
             StartCoroutine(RunFrom());
             return true;
         }
 
         if (DistanceToSpot > dist) {
             _curState = MurdererStates.Spotted;
-            player.PlayVoice(PlayerSpotVoice);
+            player.PlayVoice(PlayerVoices[Random.Range(0, PlayerVoices.Length)]);
             StartCoroutine(RunFrom());
             return true;
         }
