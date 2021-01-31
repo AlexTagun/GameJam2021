@@ -12,10 +12,17 @@ public class WinPlace : MonoBehaviour
 
     [SerializeField] private AudioSource audioSiren;
 
+    private GameObject blick;
+
     private Transform blickTransform = null;
     private Transform playerTransform = null;
 
     private bool isActivate = false;
+    private bool isShowindBlink = false;
+
+    private float curTimeToBlick = 10000f;
+
+    private Coroutine coroutineBlick = null;
 
     private void Start()
     {
@@ -25,18 +32,51 @@ public class WinPlace : MonoBehaviour
     private void Update()
     {
         if (!isActivate) return;
-        MoveBlickToPlayer();
+        UpdateBlick();
+        if (isShowindBlink) MoveBlickToPlayer();
 
     }
     public void Activate()
     {
-        var blick = Instantiate(blickPrefab, blickPosition.position, Quaternion.identity);
-        blick.SetActive(true);
+        blick = Instantiate(blickPrefab, blickPosition.position, Quaternion.identity);
+       
         blickTransform = blick.transform;
         playerTransform = GameController.Instance.Player.transform;
         road.SetActive(true);
-        audioSiren.Play();
         isActivate = true;
+    }
+
+    private void UpdateBlick()
+    {
+        if (coroutineBlick != null) return;
+        var distance = Vector3.Distance(playerTransform.position, blickPosition.position);
+        if (distance >= 800)
+        {
+            if (curTimeToBlick >= 45) coroutineBlick = StartCoroutine(ShowBlick(10));
+        }
+        else if (distance >= 600)
+        {
+            if (curTimeToBlick >= 60) coroutineBlick = StartCoroutine(ShowBlick(5));
+        }
+        else if (distance >= 300)
+        {
+            if (curTimeToBlick >= 120) coroutineBlick = StartCoroutine(ShowBlick(3));
+        }
+        curTimeToBlick += Time.deltaTime;
+    }
+
+    private IEnumerator ShowBlick(float timeShowing)
+    {
+        Debug.Log("Сирена");
+        audioSiren.Play();
+        blick.SetActive(true);
+        isShowindBlink = true;
+        yield return new WaitForSeconds(timeShowing);
+        isShowindBlink = false;
+        blick.SetActive(false);
+        audioSiren.Stop();
+        curTimeToBlick = 0f;
+        coroutineBlick = null;
     }
 
     public void MoveBlickToPlayer()
