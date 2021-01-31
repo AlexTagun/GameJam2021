@@ -6,10 +6,17 @@ using UnityEngine.Playables;
 public class Player : MonoBehaviour {
 
     public float NoiseLevel = 1;
-    public float VisibilityLevel = 20;
+    public float VisibilityLevel { get; private set; }
+
+    public void SetVisibilityLevel(bool isOn)
+    {
+        VisibilityLevel = (isOn) ? visibilityLevelOn : visibilityLevelOff;
+    }
 
     public int NumberAttempts = 3;
 
+    [SerializeField] private float visibilityLevelOn = 5;
+    [SerializeField] private float visibilityLevelOff = 1;
     [SerializeField] private PlayableDirector playableDirectorFalling;
 
     private PlayerMovement playerMovement = null;

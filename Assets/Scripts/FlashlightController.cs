@@ -22,6 +22,8 @@ public class FlashlightController : MonoBehaviour
 
     private Coroutine coroutineBlick = null;
 
+    private Player player;
+
     public void SetHasFlashlight(bool value)
     {
         HasFlashlight = value;
@@ -29,9 +31,10 @@ public class FlashlightController : MonoBehaviour
 
     private void Start()
     {
+        player = GetComponent<Player>();
         HasFlashlight = !RememberFlashlight.Instance.NeedSpawnFlashLight;
         isTurnOn = HasFlashlight;
-        IsBurn = HasFlashlight;
+        SetIsBurn(HasFlashlight);
         spotLight.SetActive(isTurnOn);
 
     }
@@ -75,7 +78,7 @@ public class FlashlightController : MonoBehaviour
 
     public void TurnOnFlashlight(bool b)
     {
-        if (!isDischarged) IsBurn = b;
+        if (!isDischarged) SetIsBurn(b);
         isTurnOn = b;
         var clip = (b) ? flashlightOn : flashlightOff;
         audioFlashlight.clip = clip;
@@ -86,9 +89,9 @@ public class FlashlightController : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            IsBurn = true;
+            SetIsBurn(true);
             yield return new WaitForSeconds(1f);
-            IsBurn = false;
+            SetIsBurn(false);
             yield return new WaitForSeconds(0.5f);
         }
         curTimeToBlick = 0f;
@@ -99,8 +102,14 @@ public class FlashlightController : MonoBehaviour
     {
         if (coroutineBlick == null) return;
         StopCoroutine(coroutineBlick);
-        IsBurn = false;
+        SetIsBurn(false);
         curTimeToBlick = 0f;
         coroutineBlick = null;
+    }
+
+    private void SetIsBurn(bool isOn)
+    {
+        IsBurn = isOn;
+        player.SetVisibilityLevel(isOn);
     }
 }
