@@ -99,6 +99,7 @@ public class FlashlightController : MonoBehaviour
         audioFlashlight.Play();
     }
 
+    private bool playVoice = false;
     private IEnumerator ShowBlick()
     {
         if (isDischarged)
@@ -109,7 +110,11 @@ public class FlashlightController : MonoBehaviour
             curTimeToBlick = 0f;
             coroutineBlick = null;
 
-            player.PlayVoice(flashlightDead);
+            if (!playVoice)
+            {
+                player.PlayVoice(flashlightDead);
+                playVoice = true;
+            }
         }
         else
         {
