@@ -11,10 +11,14 @@ public class MurdererAI : MonoBehaviour {
     [SerializeField] private float ScanRadius;
     [SerializeField] private float AttackRadius;
     [SerializeField] private float DistanceToFlee;
+    [SerializeField] private float DistanceToSpot;
     [SerializeField] private float FollowingSpeed;
-    [SerializeField] private float FleeSpeed;
+    [SerializeField] private float RoamingRadius = 40f;
+    [SerializeField] private float RoamingSpeed = 3.5f;
+    [SerializeField] private float TpRadius = 65f;
     [SerializeField] private Player player;
     [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private Sprite[] sprites;
 
     private NavMeshAgent navMesh;
 
@@ -37,59 +41,67 @@ public class MurdererAI : MonoBehaviour {
         navMesh = GetComponent<NavMeshAgent>();
         _camera = Camera.main;
         _curState = MurdererStates.Roaming;
-        
+
         var volume = GameObject.Find("Global Volume").GetComponent<Volume>();
         volume.profile.TryGet(out _colorAdjustments);
+        StartCoroutine(ScanCoroutine());
     }
 
     private void Update() {
-        if (IsSeenByPlayer()) _curState = MurdererStates.Flee;
+        IsSeenByPlayer();
+        renderer.transform.LookAt(playerTransform);
+        renderer.transform.eulerAngles = new Vector3(0, renderer.transform.eulerAngles.y, 0);
 
         switch (_curState) {
             case MurdererStates.Roaming:
-                if (_curCoroutine == null) _curCoroutine = StartCoroutine(ScanCoroutine());
+                navMeshAgent.speed = RoamingSpeed;
                 break;
             case MurdererStates.Following:
                 navMeshAgent.speed = FollowingSpeed;
                 navMesh.SetDestination(playerTransform.position);
                 if (Vector3.Distance(transform.position, player.transform.position) < AttackRadius) {
-
                     GameController.Instance.Player.Died();
                     Debug.Log("Kill");
                 }
 
                 break;
             case MurdererStates.Flee:
-                navMeshAgent.speed = FleeSpeed;
-                if (_curCoroutine == null) _curCoroutine = StartCoroutine(RunFromCor());
+                // if (_curCoroutine == null) _curCoroutine = StartCoroutine(RunFromCor());
+                _curState = MurdererStates.Roaming;
+                break;
+            case MurdererStates.Spotted:
+                _curState = MurdererStates.Roaming;
                 break;
         }
     }
 
     private IEnumerator ScanCoroutine() {
-        yield return new WaitForSeconds(ScanFrequency);
-        if ((ScanRadius + player.NoiseLevel * player.VisibilityLevel) >
-            Vector3.Distance(transform.position, player.transform.position)) {
-            Debug.Log("Player has found");
-            _curState = MurdererStates.Following;
-        } else {
-            Debug.Log("Player not found");
-        }
+        while (true) {
+            yield return new WaitForSeconds(ScanFrequency);
+            if ((ScanRadius + player.NoiseLevel * player.VisibilityLevel) >
+                Vector3.Distance(transform.position, player.transform.position)) {
+                Debug.Log("Player has found");
+                if (_curState == MurdererStates.Roaming) _curState = MurdererStates.Following;
+            } else {
+                Debug.Log("Player not found");
+                Vector3 randomVector = Random.onUnitSphere;
+                randomVector.y = 0;
 
-        _curCoroutine = null;
+                randomVector = randomVector.normalized * RoamingRadius;
+                navMesh.SetDestination(player.transform.position + randomVector);
+                _curState = MurdererStates.Roaming;
+            }
+
+            _curCoroutine = null;
+        }
     }
 
     private IEnumerator RunFromCor() {
         while (IsSeenByPlayer()) {
-            
             LeanTween.value(gameObject, 0f, -100f, 0.01f)
-                .setOnUpdate(f => {
-                    _colorAdjustments.contrast.value = f;
-                }).setOnComplete(() => {
+                .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
                     LeanTween.value(gameObject, -100f, 0, 0.8f)
-                        .setOnUpdate(f => {
-                            _colorAdjustments.contrast.value = f;
-                        });
+                        .setOnUpdate(f => { _colorAdjustments.contrast.value = f; });
                 });
             RunFrom();
             yield return new WaitForSeconds(1);
@@ -108,24 +120,42 @@ public class MurdererAI : MonoBehaviour {
         // runTo *= 10;
         // Debug.Log(runTo);
         // navMesh.SetDestination(transform.position + runTo);
-        
+        if (_curState == MurdererStates.Flee) {
+            LeanTween.value(gameObject, 0f, -100f, 0.01f)
+                .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
+                    LeanTween.value(gameObject, -100f, 0, 0.8f)
+                        .setOnUpdate(f => { _colorAdjustments.contrast.value = f; });
+                });
+        }
+
+
         Vector3 randomVector = Random.onUnitSphere;
         randomVector.y = 0;
 
-        randomVector = randomVector.normalized * 40;
-        Debug.Log(randomVector);
+        randomVector = randomVector.normalized * TpRadius;
         transform.position = transform.position + randomVector;
-
+        renderer.sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
-    [SerializeField] private Renderer renderer;
+    [SerializeField] private SpriteRenderer renderer;
     private Camera _camera;
 
     private bool IsSeenByPlayer() {
         if (!renderer.isVisible) return false;
-        if (DistanceToFlee < Vector3.Distance(transform.position, player.transform.position)) return false;
-        Vector2 pos = _camera.WorldToViewportPoint(transform.position);
-        if (Vector2.Distance(pos, new Vector2(0.5f, 0.5f)) < 0.5f) {
+        Vector2 pos = _camera.WorldToViewportPoint(renderer.transform.position);
+        var camDist = Vector2.Distance(pos, new Vector2(0.5f, 0.5f));
+
+        if (camDist > 0.5f) return false;
+        var dist = Vector3.Distance(transform.position, player.transform.position);
+        if (DistanceToFlee > dist) {
+            _curState = MurdererStates.Flee;
+            RunFrom();
+            return true;
+        }
+
+        if (DistanceToSpot > dist) {
+            _curState = MurdererStates.Spotted;
+            RunFrom();
             return true;
         }
 
