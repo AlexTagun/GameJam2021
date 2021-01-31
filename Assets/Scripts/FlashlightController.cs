@@ -11,6 +11,9 @@ public class FlashlightController : MonoBehaviour
     [SerializeField] private AudioSource audioFlashlight = null;
     [SerializeField] private AudioClip flashlightOn = null;
     [SerializeField] private AudioClip flashlightOff = null;
+
+    [SerializeField] private AudioClip batteryIsLow = null;
+    [SerializeField] private AudioClip flashlightDead = null;
     public bool HasFlashlight { get; private set; }
 
     public bool IsBurn { get; private set; } = false;
@@ -105,6 +108,8 @@ public class FlashlightController : MonoBehaviour
             SetIsBurn(false);
             curTimeToBlick = 0f;
             coroutineBlick = null;
+
+            player.PlayVoice(flashlightDead);
         }
         else
         {
@@ -116,6 +121,7 @@ public class FlashlightController : MonoBehaviour
                 SetIsBurn(true);
                 yield return new WaitForSeconds(0.2f);
             }
+            player.PlayVoice(batteryIsLow);
             coroutineBlick = null;
         }
     }
