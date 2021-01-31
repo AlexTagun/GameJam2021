@@ -18,7 +18,7 @@ public class Flashlight : MonoBehaviour {
 
     private void Update() {
 
-        float distance = Vector3.Distance(_player.position, transform.position);
+        float distance = Vector3.Distance(_player.position, flashlightPosition);
 
         if (distance > 80)
         {
