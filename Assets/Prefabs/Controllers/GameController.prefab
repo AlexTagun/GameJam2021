@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashlightPrefab: {fileID: 661351036847424396, guid: 32062b24a02a2844f8b8beacfb67d5bf, type: 3}
-  delayRestartAfterDeath: 7
+  delayRestartAfterDeath: 4
