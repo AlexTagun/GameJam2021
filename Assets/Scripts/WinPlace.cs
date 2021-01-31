@@ -7,6 +7,7 @@ public class WinPlace : MonoBehaviour
     public Transform Place;
 
     [SerializeField] private GameObject road;
+    [SerializeField] private GameObject invisibleWall;
     [SerializeField] private GameObject blickPrefab;
     [SerializeField] private Transform blickPosition;
 
@@ -43,7 +44,7 @@ public class WinPlace : MonoBehaviour
         blickTransform = blick.transform;
         playerTransform = GameController.Instance.Player.transform;
         road.SetActive(true);
-
+        invisibleWall.SetActive(false);
         curTimeToBlick = (RememberFlashlight.Instance.NeedActivateRoad) ? 0 : 1000;
 
         isActivate = true;

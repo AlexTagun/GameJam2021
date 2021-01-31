@@ -394,7 +394,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200519907}
-  m_LocalRotation: {x: 0.012391657, y: 0.000000017213459, z: -2.1331965e-10, w: 0.9999232}
+  m_LocalRotation: {x: 0.012391676, y: -0.000000017213456, z: 2.1331996e-10, w: 0.9999232}
   m_LocalPosition: {x: 498.39, y: 2.759779, z: 498.53784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -619,6 +619,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+--- !u!1 &300582278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 826774326830732762, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+  m_PrefabInstance: {fileID: 300582277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &347018146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1093,6 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Place: {fileID: 577286872}
   road: {fileID: 2127695753}
+  invisibleWall: {fileID: 300582278}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 577286872}
   audioSiren: {fileID: 577286873}
@@ -2021,6 +2027,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+--- !u!1 &1053353946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 826774326830732762, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+  m_PrefabInstance: {fileID: 1053353945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1176939600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7104433809285022242, guid: 07c910f70128263428fbbb1a635c6810, type: 3}
@@ -2059,6 +2070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Place: {fileID: 1208968676}
   road: {fileID: 2002998025}
+  invisibleWall: {fileID: 1243770115}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 1208968676}
   audioSiren: {fileID: 1208968677}
@@ -2242,6 +2254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+--- !u!1 &1243770115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 826774326830732762, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+  m_PrefabInstance: {fileID: 1243770114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1428650273
 Mesh:
   m_ObjectHideFlags: 0
@@ -2439,6 +2456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Place: {fileID: 1467542367}
   road: {fileID: 1577914103}
+  invisibleWall: {fileID: 1053353946}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 1467542367}
   audioSiren: {fileID: 1467542368}
@@ -3040,6 +3058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Place: {fileID: 1930593843}
   road: {fileID: 755326860}
+  invisibleWall: {fileID: 2089529758}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 1930593843}
   audioSiren: {fileID: 1930593846}
@@ -3489,6 +3508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+--- !u!1 &2089529758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 826774326830732762, guid: bc0c4146561735c41a47295264a0706d, type: 3}
+  m_PrefabInstance: {fileID: 2089529757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2127695752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3664,7 +3688,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140201291}
-  m_LocalRotation: {x: 0.012391657, y: 0.000000017213459, z: -2.1331965e-10, w: 0.9999232}
+  m_LocalRotation: {x: 0.012391676, y: -0.000000017213456, z: 2.1331996e-10, w: 0.9999232}
   m_LocalPosition: {x: 498.39, y: 2.759779, z: 498.53784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
