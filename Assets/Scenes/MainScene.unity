@@ -2161,7 +2161,7 @@ MonoBehaviour:
   road: {fileID: 2127695753}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 577286872}
-  audioSiren: {fileID: 0}
+  audioSiren: {fileID: 577286873}
 --- !u!65 &577286871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2203,7 +2203,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4577,7 +4577,7 @@ MonoBehaviour:
   road: {fileID: 2002998025}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 1208968676}
-  audioSiren: {fileID: 0}
+  audioSiren: {fileID: 1208968677}
 --- !u!65 &1208968675
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4619,7 +4619,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5267,7 +5267,7 @@ MonoBehaviour:
   road: {fileID: 1577914103}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 1467542367}
-  audioSiren: {fileID: 0}
+  audioSiren: {fileID: 1467542368}
 --- !u!65 &1467542366
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5309,7 +5309,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -7062,7 +7062,7 @@ MonoBehaviour:
   road: {fileID: 755326860}
   blickPrefab: {fileID: 360017612844599933, guid: a63236df67c1e6b41862dcf1fb289b9c, type: 3}
   blickPosition: {fileID: 1930593843}
-  audioSiren: {fileID: 0}
+  audioSiren: {fileID: 1930593846}
 --- !u!65 &1930593845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7090,7 +7090,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
