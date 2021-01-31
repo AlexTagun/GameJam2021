@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour {
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float visibilityLevelOff = 1;
     [SerializeField] private PlayableDirector playableDirectorFalling;
     [SerializeField] private AudioSource audioSource;
+    
+    [SerializeField] private AudioClip[] PlayerVoices;
 
     private PlayerMovement playerMovement = null;
     public FlashlightController flashlightController = null;
@@ -32,12 +35,24 @@ public class Player : MonoBehaviour {
     {
         playerMovement = GetComponent<PlayerMovement>();
         flashlightController = GetComponent<FlashlightController>();
+        
+        var volume = GameObject.Find("Global Volume").GetComponent<Volume>();
+        volume.profile.TryGet(out _colorAdjustments);
 
     }
 
     public void DiedFromTraps()
     {
         NumberAttempts--;
+        
+        LeanTween.value(gameObject, 0f, -100f, 0.01f)
+            .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
+                LeanTween.value(gameObject, -100f, 0, 0.8f)
+                    .setOnUpdate(f => { _colorAdjustments.contrast.value = f; });
+            });
+
+        if (Random.value > 0.5f) PlayVoice(PlayerVoices[Random.Range(0, PlayerVoices.Length)]);
+        
         if (NumberAttempts > 0) return;
         Died();
     }
@@ -50,12 +65,9 @@ public class Player : MonoBehaviour {
         playerMovement.SetCanMove(false);
         RememberFlashlight.Instance.RememberLastPosition(transform.position);
         GameController.Instance.HandleGameOver(false);
-        
-        // LeanTween.value(gameObject, 0f, -100f, 0.01f)
-        //     .setOnUpdate(f => { _colorAdjustments.contrast.value = f; }).setOnComplete(() => {
-        //         LeanTween.value(gameObject, -100f, 0, 0.8f)
-        //             .setOnUpdate(f => { _colorAdjustments.contrast.value = f; });
-        //     });
+
+        LeanTween.value(gameObject, 0f, -100f, 1.5f)
+            .setOnUpdate(f => { _colorAdjustments.contrast.value = f; });
     }
 
     public void RaiseFlashlight(Flashlight flashlight)

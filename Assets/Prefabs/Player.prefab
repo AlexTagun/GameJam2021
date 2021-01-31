@@ -141,6 +141,11 @@ MonoBehaviour:
   visibilityLevelOff: 1
   playableDirectorFalling: {fileID: 0}
   audioSource: {fileID: 2940321933273983247}
+  PlayerVoices:
+  - {fileID: 8300000, guid: d74846eef306f4a42b603e58da334474, type: 3}
+  - {fileID: 8300000, guid: 20d1df238ebed4148bbc1b1750252d95, type: 3}
+  - {fileID: 8300000, guid: 5e045fccbaef60f4ba8eb67beebeee04, type: 3}
+  - {fileID: 8300000, guid: d60cb74ee09457140af35e4cbe9d4d81, type: 3}
   flashlightController: {fileID: 0}
 --- !u!114 &5006454652942513609
 MonoBehaviour:
