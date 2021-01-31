@@ -18,7 +18,8 @@ public class FlashlightController : MonoBehaviour
     private bool isDischarged = false;
 
     private float curTime = 0f;
-    private float curTimeToBlick = 0f;
+    private float curTimeToBlick = 3f;
+    private int numberBlick = 0;
 
     private Coroutine coroutineBlick = null;
 
@@ -51,8 +52,18 @@ public class FlashlightController : MonoBehaviour
         }
         else
         {
-            if (curTime >= timeToDischarge) isDischarged = true;
-            else curTime += Time.deltaTime;
+            if(!isDischarged)
+            {
+                if (curTime >= timeToDischarge)
+                {
+                    isDischarged = true;
+                    SetIsBurn(false);
+                }
+                else if (curTime >= 60 && numberBlick == 0) coroutineBlick = StartCoroutine(ShowBlick());
+                else if (curTime >= 120 && numberBlick == 1) coroutineBlick = StartCoroutine(ShowBlick());
+                else if (curTime >= 180 && numberBlick == 2) coroutineBlick = StartCoroutine(ShowBlick());
+                else curTime += Time.deltaTime;
+            }
 
             if (Input.GetMouseButtonDown(1))
             {
@@ -87,15 +98,26 @@ public class FlashlightController : MonoBehaviour
 
     private IEnumerator ShowBlick()
     {
-        for (int i = 0; i < 3; i++)
+        if (isDischarged)
         {
             SetIsBurn(true);
             yield return new WaitForSeconds(1f);
             SetIsBurn(false);
-            yield return new WaitForSeconds(0.5f);
+            curTimeToBlick = 0f;
+            coroutineBlick = null;
         }
-        curTimeToBlick = 0f;
-        coroutineBlick = null;
+        else
+        {
+            numberBlick++;
+            for (int i = 0; i < 3; i++)
+            {
+                SetIsBurn(false);
+                yield return new WaitForSeconds(0.2f);
+                SetIsBurn(true);
+                yield return new WaitForSeconds(0.2f);
+            }
+            coroutineBlick = null;
+        }
     }
 
     private void StopBlick()
