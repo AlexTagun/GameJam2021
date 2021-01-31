@@ -19,6 +19,9 @@ public class MainMenu : MonoBehaviour {
     private void Start() {
         var volume = GameObject.Find("Global Volume").GetComponent<Volume>();
         volume.profile.TryGet(out _colorAdjustments);
+        if (RememberFlashlight.Instance.NeedSpawnFlashLight) {
+            OnPlay();
+        }
     }
 
     private void OnPlay() {
