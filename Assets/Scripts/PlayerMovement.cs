@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour {
 
     [Header("Sounds")]
     [SerializeField] private AudioSource audioWalk = null;
+    [SerializeField] private AudioSource audioFlashlight = null;
+    [SerializeField] private AudioClip flashlightOn = null;
+    [SerializeField] private AudioClip flashlightOff = null;
 
     private float mouseDeltaX = 0f;
     private float mouseDeltaY = 0f;
@@ -49,13 +52,16 @@ public class PlayerMovement : MonoBehaviour {
     private void Start()
     {
         HasFlashlight = !RememberFlashlight.Instance.NeedSpawnFlashLight;
-        TurnOnFlashlight(HasFlashlight);
+        spotLight.SetActive(HasFlashlight);
 
     }
 
     public void TurnOnFlashlight(bool b)
     {
         spotLight.SetActive(b);
+        var clip = (b) ? flashlightOn : flashlightOff;
+        audioFlashlight.clip = clip;
+        audioFlashlight.Play();
     }
     public void Rotate(float mouseDeltaX, float mouseDeltaY) {
         this.mouseDeltaX += mouseDeltaX * _speedRotation;
