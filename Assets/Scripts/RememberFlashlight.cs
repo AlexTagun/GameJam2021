@@ -6,6 +6,7 @@ public class RememberFlashlight : MonoBehaviour
 {
     public bool NeedSpawnFlashLight { get; private set; }
     public bool NeedActivateRoad { get; private set; }
+
     public static RememberFlashlight Instance { get; private set; }
 
 
@@ -43,5 +44,25 @@ public class RememberFlashlight : MonoBehaviour
     public WinPlace GetWinPlace()
     {
         return winPlace;
+    }
+
+    public void Clear()
+    {
+        NeedSpawnFlashLight = false;
+        NeedActivateRoad = false;
+    }
+
+    public void ReactToEndGame(bool isWin)
+    {
+        if (isWin) Clear();
+        else
+        {
+            if (NeedSpawnFlashLight) Clear();
+            else
+            {
+                RememberLastPosition(GameController.Instance.Player.transform.position);
+                RememberWinPlace(SpawnerRoad.Instance.CurWinPlace);
+            }
+        }
     }
 }

@@ -63,7 +63,7 @@ public class Player : MonoBehaviour {
         isAlive = false;
         playableDirectorFalling.Play();
         playerMovement.SetCanMove(false);
-        RememberFlashlight.Instance.RememberLastPosition(transform.position);
+       
         GameController.Instance.HandleGameOver(false);
 
         LeanTween.value(gameObject, 0f, -100f, 1.5f)

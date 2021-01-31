@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
     public void HandleGameOver(bool isWin)
     {
         OnGameOver?.Invoke(isWin);
+
+        RememberFlashlight.Instance.ReactToEndGame(isWin);
         Restart();
     }
 
