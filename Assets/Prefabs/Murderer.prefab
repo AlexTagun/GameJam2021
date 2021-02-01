@@ -71,15 +71,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   ScanFrequency: 3
-  ScanRadius: 30
+  ScanRadius: 50
   AttackRadius: 2
-  DistanceToFlee: 20
-  DistanceToSpot: 30
-  FollowingSpeed: 14
-  RoamingRadius: 40
-  RoamingSpeed: 14
-  TpRadius: 65
-  ShowTime: 0.2
+  DistanceToFlee: 30
+  DistanceToSpot: 40
+  FollowingSpeed: 9
+  RoamingRadius: 50
+  RoamingSpeed: 6
+  TpRadius: 35
+  ShowTime: 0.15
   player: {fileID: 0}
   navMeshAgent: {fileID: 3546836802215990439}
   sprites:
